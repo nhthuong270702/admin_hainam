@@ -135,7 +135,7 @@ class StatisticalController extends Controller
                 'unit' => $productDetails ? $productDetail->unit : null,
                 'code' => $productDetails ? $productDetail->code : null,
                 'average_price_import' => $averagePriceImport,
-                'average_price_export' => $averagePriceExport,
+                'average_price_export' => $averagePriceExport
             ];
         });
 
