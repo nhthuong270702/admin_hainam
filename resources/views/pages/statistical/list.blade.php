@@ -194,7 +194,8 @@
 
     <script>
         var data = document.getElementById('data').value;
-        let dataValue = (JSON.parse(data));
+        var decodedJSON = decodeURIComponent(data);
+        var dataValue = JSON.parse(decodedJSON);
         for (var i = 0; i < dataValue.length; i++) {
             var code = dataValue[i].code;
             var inputField = document.getElementById(`tondau${code}`);
@@ -216,9 +217,5 @@
             })(inputField, nhap, xuat, resultElement));
         }
 
-
-
-
-        // Bắt sự kiện khi người dùng nhập xong (sử dụng sự kiện "keyup")
     </script>
 @endsection
