@@ -182,7 +182,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <input hidden id="data" value={{ $results }}>
+                        <input hidden id="data" value="{{ $results }}">
                         <div class="mt-4 mb-4" style=" display: flex; justify-content: center;">
                             {{-- {!! $exports->links() !!} --}}
                         </div>
