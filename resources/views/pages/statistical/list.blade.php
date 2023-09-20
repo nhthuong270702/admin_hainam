@@ -54,8 +54,7 @@
                                     @endforeach
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
-
-                                        {{ $totalCaptan }}</th>
+                                        {{ number_format($totalCaptan, 0, ',', '.') }}đ</th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center border">
                                         @php
@@ -67,7 +66,7 @@
                                                 $revenue += $result['quanity_export'] * $result['average_price_export'];
                                             @endphp
                                         @endforeach
-                                        {{ $revenue }}
+                                        {{ number_format($revenue, 0, ',', '.') }}đ
                                     </th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center border">
@@ -80,7 +79,8 @@
                                                 $profit += $result['quanity_export'] * $result['average_price_export'] - $result['quanity_export'] * $result['average_price_import'];
                                             @endphp
                                         @endforeach
-                                        {{ $profit }}
+                                        {{ number_format($profit, 0, ',', '.') }}đ
+
                                     </th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center border">
@@ -156,21 +156,22 @@
                                         </td>
                                         <td class="border">
                                             {{ $result['quanity_export'] }}
-                                            <input id="xuat{{ $result['code'] }}" value={{ +$result['quanity_export'] }} type="text"
-                                                hidden>
+                                            <input id="xuat{{ $result['code'] }}" value={{ +$result['quanity_export'] }}
+                                                type="text" hidden>
                                         </td>
                                         <td class="border">
                                             <input id="result{{ $result['code'] }}" style="border: unset; width: 90px;"
                                                 type="number">
                                         </td>
                                         <td class="border">
-                                            {{ $result['quanity_export'] * $result['average_price_import'] }}
+                                            {{ number_format($result['quanity_export'] * $result['average_price_import'], 0, ',', '.') }}đ
                                         </td>
                                         <td class="border">
-                                            {{ $result['quanity_export'] * $result['average_price_export'] }}
+                                            {{ number_format($result['quanity_export'] * $result['average_price_export'], 0, ',', '.') }}đ
                                         </td>
                                         <td class="border">
-                                            {{ $result['quanity_export'] * $result['average_price_export'] - $result['quanity_export'] * $result['average_price_import'] }}
+                                            {{ number_format($result['quanity_export'] * $result['average_price_export'] - $result['quanity_export'] * $result['average_price_import'], 0, ',', '.') }}đ
+
                                         </td>
                                         <td class="border">
                                             <p class="text-sm font-weight-bold mb-0">

@@ -15,7 +15,6 @@
                     </div>
                 @endif
                 <div class="card-header pb-0 search">
-
                     <form action="{{ route('admin.import-product.search') }}" method="GET" role="search">
                         <div class="search-container" style="display: flex">
                             <div class="search-form" style="width: 400px; margin-right: 30px">
@@ -36,10 +35,10 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 border">
                                         Ngày nhập
                                     </th>
-                                    <th
+                                    {{-- <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 border ps-2">
                                         Chứng từ
-                                    </th>
+                                    </th> --}}
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 border ps-2">
                                         Mã hàng
@@ -87,9 +86,9 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="border">
+                                        {{-- <td class="border">
                                             <p class="text-sm font-weight-bold mb-0">{{ $import->document }}</p>
-                                        </td>
+                                        </td> --}}
                                         <td class="border">
                                             <p class="text-sm font-weight-bold mb-0">{{ $import->product->code }}</p>
                                         </td>
@@ -110,13 +109,14 @@
                                             <p class="text-sm font-weight-bold mb-0">
                                                 <input disabled style="border: none; width: 100px; background-color: white"
                                                     class="price" type="text" id="price_{{ $loop->index }}"
-                                                    value="{{ $import->price }}">
+                                                    value="{{ number_format($import->price, 0, ',', '.') }}đ">
                                             </p>
                                         </td>
                                         <td class="border">
                                             <p class="text-sm font-weight-bold mb-0">
                                                 <input disabled style="border: none; width: 100px; background-color: white"
-                                                    class="total" type="text" id="total_{{ $loop->index }}">
+                                                    class="total" type="text" id="total_{{ $loop->index }}"
+                                                    value="{{ number_format($import->quanity * $import->price, 0, ',', '.') }}đ">
                                             </p>
                                         </td>
                                         <td class="border">
@@ -146,22 +146,18 @@
             </div>
         </div>
     </div>
-    <script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             var quantityInputs = document.querySelectorAll(".quantity");
             var priceInputs = document.querySelectorAll(".price");
             var totalInputs = document.querySelectorAll(".total");
-
 
             for (var i = 0; i < quantityInputs.length; i++) {
                 var quantity = parseFloat(quantityInputs[i].value) || 0;
                 var price = parseFloat(priceInputs[i].value) || 0;
 
                 var total = quantity * price;
-
-                totalInputs[i].value = total;
             }
-
         });
-    </script>
+    </script> --}}
 @endsection

@@ -44,13 +44,13 @@
                                         class="form-control bg-white border-md">
                                 </div>
                             </div>
-                            <div class="form-group col-lg-12 mb-4">
+                            {{-- <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
                                     <label for="" style="width: 105px;">Chứng chỉ</label>
                                     <input autocomplete="off" required type="text" placeholder="Nhập chứng chỉ"
                                         name="document" class="form-control bg-white border-md">
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
                                     <label for="" style="width: 105px;">Số lượng</label>
@@ -72,25 +72,25 @@
                                         name="buyer_name" class="form-control bg-white border-md">
                                 </div>
                             </div>
-                            <div class="form-group col-lg-12 mb-4">
+                            {{-- <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
                                     <label for="" style="width: 105px;">Sđt người mua</label>
                                     <input autocomplete="off" required type="text" placeholder="Nhập số điện thoại"
                                         name="buyer_phone" class="form-control bg-white border-md">
                                 </div>
-                            </div>
-                            <div class="form-group col-lg-12 mb-4">
+                            </div> --}}
+                            {{-- <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
                                     <label for="" style="width: 105px;">Địa chỉ người mua</label>
                                     <input autocomplete="off" required type="text" placeholder="Nhập địa chỉ"
                                         name="buyer_address" class="form-control bg-white border-md">
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
-                                    <label for="" style="width: 105px;">Biển số xe người mua</label>
-                                    <input autocomplete="off" required type="text" placeholder="Nhập biển số xe"
-                                        name="buyer_driver" class="form-control bg-white border-md">
+                                    <label for="" style="width: 105px;">Ghi chú</label>
+                                    <input autocomplete="off" required type="text" placeholder="Nhập ghi chú"
+                                        name="note" class="form-control bg-white border-md">
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 mx-auto mb-0">

@@ -32,26 +32,14 @@
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0 border">
                             <thead>
-                                <tr class="border">
-                                    <th colspan="8"
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 border">
-                                    </th>
-                                    <th colspan="4"
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
-                                        Người
-                                        mua</th>
-                                    <th colspan="2"
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center border">
-                                    </th>
-                                </tr>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Ngày xuất
                                     </th>
-                                    <th
+                                    {{-- <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 border">
                                         Chứng từ
-                                    </th>
+                                    </th> --}}
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 border">
                                         Mã hàng
@@ -78,19 +66,11 @@
                                     </th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 border">
-                                        Tên
+                                        Tên người mua
                                     </th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 border">
-                                        SĐT
-                                    </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 border">
-                                        Địa chỉ
-                                    </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 border">
-                                        Biển số
+                                        Ghi chú
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 border">
                                         Hành động</th>
@@ -106,9 +86,9 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="border">
+                                        {{-- <td class="border">
                                             <p class="text-sm font-weight-bold mb-0">{{ $export->document }}</p>
-                                        </td>
+                                        </td> --}}
                                         <td class="border">
                                             <p class="text-sm font-weight-bold mb-0">{{ $export->product->code }}</p>
                                         </td>
@@ -129,26 +109,21 @@
                                             <p class="text-sm font-weight-bold mb-0">
                                                 <input disabled style="border: none; width: 100px; background-color: white"
                                                     class="price" type="text" id="price_{{ $loop->index }}"
-                                                    value="{{ $export->price }}">
+                                                    value="{{ number_format($export->price, 0, '', '.') }} đ">
                                             </p>
                                         </td>
                                         <td class="border">
                                             <p class="text-sm font-weight-bold mb-0">
                                                 <input disabled style="border: none; width: 100px; background-color: white"
-                                                    class="total" type="text" id="total_{{ $loop->index }}">
+                                                    class="total" type="text" id="total_{{ $loop->index }}"
+                                                    value="{{ number_format($export->quanity * $export->price, 0, ',', '.') }}đ">
                                             </p>
                                         </td>
                                         <td class="border">
                                             <p class="text-sm font-weight-bold mb-0">{{ $export->buyer_name }}</p>
                                         </td>
                                         <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $export->buyer_phone }}</p>
-                                        </td>
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $export->buyer_address }}</p>
-                                        </td>
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $export->buyer_driver }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $export->note }}</p>
                                         </td>
                                         <td class="align-middle text-end">
                                             <div class="d-flex px-3 py-1 justify-content-center align-items-center">
@@ -172,7 +147,7 @@
         </div>
     </div>
 
-    <script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             var quantityInputs = document.querySelectorAll(".quantity");
             var priceInputs = document.querySelectorAll(".price");
@@ -189,5 +164,5 @@
             }
 
         });
-    </script>
+    </script> --}}
 @endsection

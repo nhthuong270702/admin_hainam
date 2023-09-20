@@ -37,13 +37,13 @@
                                     + Thêm sản phẩm
                                 </button>
                             </div>
-                            <div class="form-group col-lg-12 mb-4">
+                            {{-- <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
                                     <label for="" style="width: 105px;">Chứng chỉ</label>
                                     <input autocomplete="off" required type="text" placeholder="Nhập chứng chỉ"
                                         name="document" class="form-control bg-white border-md">
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
                                     <label for="" style="width: 105px;">Số lượng</label>

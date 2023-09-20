@@ -43,9 +43,7 @@ class ExportProductController extends Controller
             'quanity',
             'price',
             'buyer_name',
-            'buyer_phone',
-            'buyer_address',
-            'buyer_driver',
+            'note',
             'product_id'
         );
         $this->exportProductService->create($data);
@@ -67,9 +65,7 @@ class ExportProductController extends Controller
             'quanity',
             'price',
             'buyer_name',
-            'buyer_phone',
-            'buyer_address',
-            'buyer_driver',
+            'note',
             'product_id'
         );
         $product = $this->exportProductService->find($id);

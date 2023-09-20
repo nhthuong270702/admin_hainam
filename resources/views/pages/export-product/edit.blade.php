@@ -41,14 +41,14 @@
                                         name="date" class="form-control bg-white border-md" value={{ $export->date }}>
                                 </div>
                             </div>
-                            <div class="form-group col-lg-12 mb-4">
+                            {{-- <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
                                     <label for="" style="width: 105px;">Chứng chỉ</label>
                                     <input autocomplete="off" required type="text" placeholder="Nhập chứng chỉ"
                                         name="document" class="form-control bg-white border-md"
                                         value={{ $export->document }}>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
                                     <label for="" style="width: 105px;">Số lượng</label>
@@ -79,20 +79,19 @@
                                         value={{ $export->buyer_phone }}>
                                 </div>
                             </div>
-                            <div class="form-group col-lg-12 mb-4">
+                            {{-- <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
                                     <label for="" style="width: 105px;">Địa chỉ người mua</label>
                                     <input autocomplete="off" required type="text" placeholder="Nhập địa chỉ"
                                         name="buyer_address" class="form-control bg-white border-md"
                                         value={{ $export->buyer_address }}>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
-                                    <label for="" style="width: 105px;">Biển số xe người mua</label>
-                                    <input autocomplete="off" required type="text" placeholder="Nhập biển số xe"
-                                        name="buyer_driver" class="form-control bg-white border-md"
-                                        value={{ $export->buyer_driver }}>
+                                    <label for="" style="width: 105px;">Ghi chú</label>
+                                    <input autocomplete="off" required type="text" placeholder="Nhập ghi chú"
+                                        name="note" class="form-control bg-white border-md" value={{ $export->note }}>
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 mx-auto mb-0">

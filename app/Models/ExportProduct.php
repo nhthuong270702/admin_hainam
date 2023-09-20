@@ -16,9 +16,7 @@ class ExportProduct extends Model
         'quanity',
         'price',
         'buyer_name',
-        'buyer_phone',
-        'buyer_address',
-        'buyer_driver',
+        'note',
         'product_id',
     ];
 
