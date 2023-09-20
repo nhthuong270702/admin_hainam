@@ -36,8 +36,8 @@
                             </div>
                             <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
-                                    <label for="" style="width: 105px;">Ngày nhập</label>
-                                    <input autocomplete="off" required type="date" placeholder="Nhập ngày nhập hàng"
+                                    <label for="" style="width: 105px;">Ngày bán</label>
+                                    <input autocomplete="off" required type="date" placeholder="Nhập ngày bán hàng"
                                         name="date" class="form-control bg-white border-md" value={{ $export->date }}>
                                 </div>
                             </div>
