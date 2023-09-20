@@ -19,12 +19,12 @@
                         <div class="search-container" style="display: flex">
                             <div class="search-item">
                                 <p>Từ ngày</p>
-                                <input style="width: 100%;" type="date" name="dateFrom"
+                                <input required style="width: 100%;" type="date" name="dateFrom"
                                     value={{ request()->get('dateFrom') }}>
                             </div>
                             <div class="search-item">
                                 <p>Đến ngày</p>
-                                <input style="width: 100%;" type="date" name="dateTo"
+                                <input required style="width: 100%;" type="date" name="dateTo"
                                     value={{ request()->get('dateTo') }}>
                             </div>
                             <div class="search-btn" style="margin-left: 30px;margin-top: 43px">
