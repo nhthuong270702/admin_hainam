@@ -15,16 +15,16 @@
                 @endif
                 <div class="card-header pb-0 search">
 
-                    <form action="{{route('admin.statistical.search')}}" method="GET" role="search">
+                    <form action="{{ route('admin.statistical.search') }}" method="GET" role="search">
                         <div class="search-container" style="display: flex">
                             <div class="search-item">
                                 <p>Từ ngày</p>
-                                <input style="width: 100%;" type="date" name="dateFrom"
+                                <input required style="width: 100%;" type="date" name="dateFrom"
                                     value={{ request()->get('dateFrom') }}>
                             </div>
                             <div class="search-item">
                                 <p>Đến ngày</p>
-                                <input style="width: 100%;" type="date" name="dateTo"
+                                <input required style="width: 100%;" type="date" name="dateTo"
                                     value={{ request()->get('dateTo') }}>
                             </div>
                             <div class="search-btn" style="margin-left: 30px;margin-top: 43px">
@@ -67,7 +67,7 @@
                                                 $revenue += $result['quanity_export'] * $result['average_price_export'];
                                             @endphp
                                         @endforeach
-                                        {{$revenue}}
+                                        {{ $revenue }}
                                     </th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center border">
@@ -80,7 +80,7 @@
                                                 $profit += $result['quanity_export'] * $result['average_price_export'] - $result['quanity_export'] * $result['average_price_import'];
                                             @endphp
                                         @endforeach
-                                        {{$profit}}
+                                        {{ $profit }}
                                     </th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center border">
@@ -146,16 +146,22 @@
                                             {{ $result['unit'] }}
                                         </td>
                                         <td class="border">
-
+                                            <input id="tondau{{ $result['code'] }}" style="border: unset; width: 90px;"
+                                                type="number">
                                         </td>
                                         <td class="border">
                                             {{ $result['quanity_import'] }}
+                                            <input id="nhap{{ $result['code'] }}" value={{ +$result['quanity_import'] }}
+                                                type="text" hidden>
                                         </td>
                                         <td class="border">
                                             {{ $result['quanity_export'] }}
+                                            <input id="xuat{{ $result['code'] }}" value={{ +$result['quanity_export'] }} type="text"
+                                                hidden>
                                         </td>
                                         <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0"></p>
+                                            <input id="result{{ $result['code'] }}" style="border: unset; width: 90px;"
+                                                type="number">
                                         </td>
                                         <td class="border">
                                             {{ $result['quanity_export'] * $result['average_price_import'] }}
@@ -169,14 +175,14 @@
                                         <td class="border">
                                             <p class="text-sm font-weight-bold mb-0">
                                                 <input disabled style="border: none; width: 100px; background-color: white"
-                                                    class="price" type="text" id="price_{{}}"
-                                                    value="">
+                                                    class="price" type="text" value="">
                                             </p>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        <input hidden id="data" value={{ $results }}>
                         <div class="mt-4 mb-4" style=" display: flex; justify-content: center;">
                             {{-- {!! $exports->links() !!} --}}
                         </div>
@@ -186,22 +192,33 @@
         </div>
     </div>
 
-    {{-- <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var quantityInputs = document.querySelectorAll(".quantity");
-            var priceInputs = document.querySelectorAll(".price");
-            var totalInputs = document.querySelectorAll(".total");
+    <script>
+        var data = document.getElementById('data').value;
+        let dataValue = (JSON.parse(data));
+        for (var i = 0; i < dataValue.length; i++) {
+            var code = dataValue[i].code;
+            var inputField = document.getElementById(`tondau${code}`);
+            var nhap = document.getElementById(`nhap${code}`);
+            var xuat = document.getElementById(`xuat${code}`);
+            var resultElement = document.getElementById(`result${code}`);
+
+            // Sử dụng closure để bảo vệ biến inputField
+            inputField.addEventListener('keyup', (function(inputField, nhap, xuat, resultElement) {
+                return function() {
+                    // Lấy giá trị từ trường input
+                    var inputValue = inputField.value;
+                    console.log(inputValue);
+                    let num = Number(inputValue) + Number(nhap.value) - Number(xuat.value)
+
+                    // Hiển thị kết quả trong phần tử HTML khác
+                    resultElement.value = num;
+                };
+            })(inputField, nhap, xuat, resultElement));
+        }
 
 
-            for (var i = 0; i < quantityInputs.length; i++) {
-                var quantity = parseFloat(quantityInputs[i].value) || 0;
-                var price = parseFloat(priceInputs[i].value) || 0;
 
-                var total = quantity * price;
 
-                totalInputs[i].value = total;
-            }
-
-        });
-    </script> --}}
+        // Bắt sự kiện khi người dùng nhập xong (sử dụng sự kiện "keyup")
+    </script>
 @endsection

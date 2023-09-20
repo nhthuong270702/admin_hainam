@@ -39,7 +39,7 @@
                             </div>
                             <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
-                                    <label for="" style="width: 105px;">Ngày mua</label>
+                                    <label for="" style="width: 105px;">Ngày bán</label>
                                     <input autocomplete="off" required type="date" name="date"
                                         class="form-control bg-white border-md">
                                 </div>
