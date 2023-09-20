@@ -71,14 +71,14 @@
                                         value={{ $export->buyer_name }}>
                                 </div>
                             </div>
-                            <div class="form-group col-lg-12 mb-4">
+                            {{-- <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
                                     <label for="" style="width: 105px;">Sđt người mua</label>
                                     <input autocomplete="off" required type="text" placeholder="Nhập số điện thoại"
                                         name="buyer_phone" class="form-control bg-white border-md"
                                         value={{ $export->buyer_phone }}>
                                 </div>
-                            </div>
+                            </div> --}}
                             {{-- <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
                                     <label for="" style="width: 105px;">Địa chỉ người mua</label>

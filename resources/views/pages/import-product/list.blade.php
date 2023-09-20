@@ -130,7 +130,7 @@
                                                 <a class="btn btn-xs btn-primary mt-3" style="margin-right: 5px"
                                                     href="{{ route('admin.import-product.edit', $import->id) }}">Sửa</a>
                                                 <a class="btn btn-xs btn-danger mt-3"
-                                                    onclick="return confirm('Bạn có chắc muốn xoá sản phẩm này không?');"
+                                                    onclick="return confirm('Bạn có chắc muốn xoá không?');"
                                                     href="{{ route('admin.import-product.delete', $import->id) }}">Xóa</a>
                                             </div>
                                         </td>
