@@ -20,7 +20,7 @@ use App\Http\Controllers\Admin\StatisticalController\StatisticalController;
 
 Route::controller(AuthController::class)
     ->group(function () {
-        Route::prefix('login-admin')->as('login.')
+        Route::as('login.')
             ->group(function () {
                 Route::get('/', 'getLogin')->name('create');
                 Route::post('/', 'postLogin')->name('store');
