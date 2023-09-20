@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\ImportProduct\ImportProductController;
 use App\Http\Controllers\Admin\ExportProduct\ExportProductController;
 use App\Http\Controllers\Admin\AdminController\AdminController;
+use App\Http\Controllers\Admin\StatisticalController\StatisticalController;
 
 // |--------------------------------------------------------------------------
 // | Web Routes
@@ -46,6 +47,12 @@ Route::prefix('admin')->as('admin.')
                 Route::post('/{id}', 'update')->name('update');
                 Route::get('delete/{id}', 'delete')->name('delete');
                 Route::get('search/product', 'search')->name('search');
+            });
+        Route::controller(StatisticalController::class)
+            ->prefix('/statistical')->as('statistical.')
+            ->group(function () {
+                Route::get('/', 'index')->name('list');
+                Route::get('search/', 'search')->name('search');
             });
         Route::controller(ImportProductController::class)
             ->prefix('/import-products')->as('import-product.')
