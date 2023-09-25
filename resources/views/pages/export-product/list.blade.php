@@ -20,7 +20,8 @@
                         <div class="search-container" style="display: flex">
                             <div class="search-form" style="width: 400px; margin-right: 30px">
                                 <input autocomplete="off" style="width: 100%; height: fit-content;" type="text"
-                                    placeholder="Tên, mã sản phẩm" name="infos" value="{{ request()->get('infos') }}">
+                                    placeholder="Tên, mã sản phẩm, tên người mua" name="infos"
+                                    value="{{ request()->get('infos') }}">
                             </div>
                             <div class="search-btn" style="display: flex; gap: 10px">
                                 <button style="margin: 0; border: none" type="submit">Tìm kiếm</button>

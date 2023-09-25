@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\ExportProduct;
 
 use App\Http\Controllers\Controller;
+use App\Models\ExportProduct;
 use App\Models\Product;
 use App\Services\ExportProductService;
 use App\Services\ProductService;
@@ -87,9 +88,14 @@ class ExportProductController extends Controller
 
     public function search(Request $request)
     {
-        $infos = $request->only('infos');
-        $exports = Product::where('name', 'like', '%' . $infos['infos'] . '%')
-            ->orWhere('code', 'like', '%' . $infos['infos'] . '%')
+        $infos = $request->input('infos');
+
+        $exports = ExportProduct::join('products', 'export_products.product_id', '=', 'products.id')
+            ->where(function ($query) use ($infos) {
+                $query->where('products.name', 'like', '%' . $infos . '%')
+                    ->orWhere('products.code', 'like', '%' . $infos . '%');
+            })
+            ->orWhere('export_products.buyer_name', 'like', '%' . $infos . '%')
             ->paginate(10);
 
         return view('pages.export-product.list', ['exports' => $exports]);

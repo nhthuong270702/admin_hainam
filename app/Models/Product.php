@@ -15,4 +15,9 @@ class Product extends Model
         'name',
         'unit',
     ];
+
+    public function export_products()
+    {
+        return $this->hasMany(ExportProduct::class);
+    }
 }
