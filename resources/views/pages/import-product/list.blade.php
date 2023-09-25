@@ -82,7 +82,8 @@
                                         <td class="border">
                                             <div class="d-flex px-3 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $import->date }}</h6>
+                                                    <h6 class="mb-0 text-sm">
+                                                        {{ \Carbon\Carbon::parse($import->date)->format('d/m/Y') }}</h6>
                                                 </div>
                                             </div>
                                         </td>
@@ -109,14 +110,14 @@
                                             <p class="text-sm font-weight-bold mb-0">
                                                 <input disabled style="border: none; width: 100px; background-color: white"
                                                     class="price" type="text" id="price_{{ $loop->index }}"
-                                                    value="{{ number_format($import->price, 0, ',', '.') }}đ">
+                                                    value="{{ number_format(intval($import->price), 0, ',', '.') }}đ">
                                             </p>
                                         </td>
                                         <td class="border">
                                             <p class="text-sm font-weight-bold mb-0">
                                                 <input disabled style="border: none; width: 100px; background-color: white"
                                                     class="total" type="text" id="total_{{ $loop->index }}"
-                                                    value="{{ number_format($import->quanity * $import->price, 0, ',', '.') }}đ">
+                                                    value="{{ number_format(intval($import->quanity) * intval($import->price), 0, ',', '.') }}đ">
                                             </p>
                                         </td>
                                         <td class="border">

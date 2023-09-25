@@ -60,7 +60,9 @@
                                 <div class="sub-form">
                                     <label for="" style="width: 105px;">Giá nhập</label>
                                     <input autocomplete="off" required type="text" placeholder="Nhập giá nhập hàng"
-                                        name="price" class="form-control bg-white border-md" value={{ $export->price }}>
+                                        name="price" class="form-control bg-white border-md"
+                                        value="{{ number_format(intval($export->price), 0, ',', '.') }}"
+                                        oninput="formatCurrency(this)">
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 mb-4">
@@ -152,4 +154,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function formatCurrency(input) {
+            // Lấy giá trị người dùng đã nhập
+            let value = input.value;
+
+            // Loại bỏ tất cả các ký tự không phải số (ví dụ: dấu phẩy, dấu chấm)
+            value = value.replace(/[^0-9]/g, '');
+
+            value = parseFloat(value).toLocaleString('vi-VN');
+
+            // Gán giá trị đã định dạng lại vào trường input
+            input.value = value;
+        }
+    </script>
 @endsection

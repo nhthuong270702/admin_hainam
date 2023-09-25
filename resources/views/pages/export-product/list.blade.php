@@ -82,7 +82,9 @@
                                         <td class="border">
                                             <div class="d-flex px-3 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $export->date }}</h6>
+                                                    <h6 class="mb-0 text-sm">
+                                                        {{ \Carbon\Carbon::parse($export->date)->format('d/m/Y') }}
+                                                    </h6>
                                                 </div>
                                             </div>
                                         </td>
@@ -102,21 +104,21 @@
                                             <p class="text-sm font-weight-bold mb-0">
                                                 <input disabled style="border: none; width: 100px; background-color: white"
                                                     class="quantity" type="text" id="quanity_{{ $loop->index }}"
-                                                    value="{{ $export->quanity }}">
+                                                    value="{{ intval($export->quanity) }}">
                                             </p>
                                         </td>
                                         <td class="border">
                                             <p class="text-sm font-weight-bold mb-0">
                                                 <input disabled style="border: none; width: 100px; background-color: white"
                                                     class="price" type="text" id="price_{{ $loop->index }}"
-                                                    value="{{ number_format($export->price, 0, '', '.') }} đ">
+                                                    value="{{ number_format(intval($export->price), 0, '', '.') }} đ">
                                             </p>
                                         </td>
                                         <td class="border">
                                             <p class="text-sm font-weight-bold mb-0">
                                                 <input disabled style="border: none; width: 100px; background-color: white"
                                                     class="total" type="text" id="total_{{ $loop->index }}"
-                                                    value="{{ number_format($export->quanity * $export->price, 0, ',', '.') }}đ">
+                                                    value="{{ number_format(intval($export->quanity) * intval($export->price), 0, ',', '.') }}đ">
                                             </p>
                                         </td>
                                         <td class="border">

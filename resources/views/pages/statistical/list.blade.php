@@ -16,22 +16,21 @@
                 <div class="card-header pb-0 search">
 
                     <form action="{{ route('admin.statistical.search') }}" method="GET" role="search">
-                        <div class="search-container" style="display: flex">
+                        <div class="search-container" style="display: flex; flex-wrap: wrap; gap: 20px">
                             <div class="search-item">
                                 <p>Từ ngày</p>
-                                <input required style="width: 100%;" type="date" name="dateFrom"
+                                <input required style="width: 200px;" type="date" name="dateFrom"
                                     value={{ request()->get('dateFrom') }}>
                             </div>
                             <div class="search-item">
                                 <p>Đến ngày</p>
-                                <input required style="width: 100%;" type="date" name="dateTo"
+                                <input required style="width: 200px;" type="date" name="dateTo"
                                     value={{ request()->get('dateTo') }}>
                             </div>
-                            <div class="search-btn" style="margin-left: 30px;margin-top: 43px">
+                            <div class="search-btn" style="margin-top: 43px">
                                 <button style="margin: 0; border: none" type="submit">Tìm kiếm</button>
                             </div>
                         </div>
-
                     </form>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -39,7 +38,7 @@
                         <table class="table align-items-center mb-0 border">
                             <thead>
                                 <tr class="border">
-                                    <th colspan="7" style="text-align: center"
+                                    <th colspan="6" style="text-align: center"
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 border">
                                         Tổng
                                     </th>
@@ -82,10 +81,6 @@
                                         {{ number_format($profit, 0, ',', '.') }}đ
 
                                     </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center border">
-
-                                    </th>
                                 </tr>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -98,10 +93,6 @@
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 border">
                                         ĐVT
-                                    </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 border">
-                                        Tồn đầu
                                     </th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 border">
@@ -146,22 +137,13 @@
                                             {{ $result['unit'] }}
                                         </td>
                                         <td class="border">
-                                            <input id="tondau{{ $result['code'] }}" style="border: unset; width: 90px;"
-                                                type="number">
-                                        </td>
-                                        <td class="border">
                                             {{ $result['quanity_import'] }}
-                                            <input id="nhap{{ $result['code'] }}" value={{ +$result['quanity_import'] }}
-                                                type="text" hidden>
                                         </td>
                                         <td class="border">
                                             {{ $result['quanity_export'] }}
-                                            <input id="xuat{{ $result['code'] }}" value={{ +$result['quanity_export'] }}
-                                                type="text" hidden>
                                         </td>
                                         <td class="border">
-                                            <input id="result{{ $result['code'] }}" style="border: unset; width: 90px;"
-                                                type="number">
+                                            {{ $result['quanity_import'] - $result['quanity_export'] }}
                                         </td>
                                         <td class="border">
                                             {{ number_format($result['quanity_export'] * $result['average_price_import'], 0, ',', '.') }}đ
@@ -192,31 +174,4 @@
             </div>
         </div>
     </div>
-
-    <script>
-        var data = document.getElementById('data').value;
-        var decodedJSON = decodeURIComponent(data);
-        var dataValue = JSON.parse(decodedJSON);
-        for (var i = 0; i < dataValue.length; i++) {
-            var code = dataValue[i].code;
-            var inputField = document.getElementById(`tondau${code}`);
-            var nhap = document.getElementById(`nhap${code}`);
-            var xuat = document.getElementById(`xuat${code}`);
-            var resultElement = document.getElementById(`result${code}`);
-
-            // Sử dụng closure để bảo vệ biến inputField
-            inputField.addEventListener('keyup', (function(inputField, nhap, xuat, resultElement) {
-                return function() {
-                    // Lấy giá trị từ trường input
-                    var inputValue = inputField.value;
-                    console.log(inputValue);
-                    let num = Number(inputValue) + Number(nhap.value) - Number(xuat.value)
-
-                    // Hiển thị kết quả trong phần tử HTML khác
-                    resultElement.value = num;
-                };
-            })(inputField, nhap, xuat, resultElement));
-        }
-
-    </script>
 @endsection

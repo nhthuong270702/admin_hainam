@@ -62,7 +62,8 @@
                                 <div class="sub-form">
                                     <label for="" style="width: 105px;">Giá xuất</label>
                                     <input autocomplete="off" required type="text" placeholder="Nhập giá nhập hàng"
-                                        name="price" class="form-control bg-white border-md">
+                                        name="price" class="form-control bg-white border-md"
+                                        oninput="formatCurrency(this)">
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 mb-4">
@@ -146,4 +147,19 @@
     <script src="{{ asset('js/orders/jquery.min.js') }}"></script>
     <script src="{{ asset('js/orders/selectize.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/orders/selectize.bootstrap3.min.css') }}">
+    <script>
+        function formatCurrency(input) {
+            // Lấy giá trị người dùng đã nhập
+            let value = input.value;
+
+            // Loại bỏ tất cả các ký tự không phải số (ví dụ: dấu phẩy, dấu chấm)
+            value = value.replace(/[^0-9]/g, '');
+
+            // Định dạng giá trị dưới dạng tiền tệ (sử dụng toLocaleString)
+            value = parseFloat(value).toLocaleString('vi-VN');
+
+            // Gán giá trị đã định dạng lại vào trường input
+            input.value = value;
+        }
+    </script>
 @endsection

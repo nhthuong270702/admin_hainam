@@ -48,6 +48,7 @@ class ImportProductController extends Controller
             'note',
             'product_id'
         );
+        $data['price'] =  str_replace([' ', '.', '₫'], '', $data['price']);
         $this->importProductService->create($data);
         return redirect()->route('admin.import-product.list')->with('msg', 'Thêm thành công');
     }
@@ -70,7 +71,10 @@ class ImportProductController extends Controller
             'note',
             'product_id'
         );
+
         $product = $this->importProductService->find($id);
+        $data['price'] =  str_replace([' ', '.', '₫'], '', $data['price']);
+
         $this->importProductService->update($product, $data);
         return redirect()->route('admin.import-product.list')->with('msg', 'Cập nhật thành công');
     }

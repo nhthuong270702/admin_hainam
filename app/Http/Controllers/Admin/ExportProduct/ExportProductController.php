@@ -46,6 +46,8 @@ class ExportProductController extends Controller
             'note',
             'product_id'
         );
+        $data['price'] =  str_replace([' ', '.', '₫'], '', $data['price']);
+
         $this->exportProductService->create($data);
         return redirect()->route('admin.export-product.list')->with('msg', 'Thêm thành công');
     }
@@ -68,7 +70,10 @@ class ExportProductController extends Controller
             'note',
             'product_id'
         );
+
         $product = $this->exportProductService->find($id);
+        $data['price'] =  str_replace([' ', '.', '₫'], '', $data['price']);
+
         $this->exportProductService->update($product, $data);
         return redirect()->route('admin.export-product.list')->with('msg', 'Cập nhật thành công');
     }
