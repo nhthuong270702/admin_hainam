@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ExportProduct extends Model
 {
     use HasFactory;
+    protected $table = 'export_products';
 
     protected $fillable = [
         'id',

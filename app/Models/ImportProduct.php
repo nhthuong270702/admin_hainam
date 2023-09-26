@@ -9,6 +9,8 @@ class ImportProduct extends Model
 {
     use HasFactory;
 
+    protected $table = 'import_products';
+
     protected $fillable = [
         'id',
         'date',

@@ -15,11 +15,12 @@
                     </div>
                 @endif
                 <div class="card-header pb-0 search">
-                    <form action="{{ route('admin.import-product.search') }}" method="GET" role="search">
+                    <form action="{{ route('admin.import-product.search') }}" method="GET">
                         <div class="search-container" style="display: flex">
                             <div class="search-form" style="width: 400px; margin-right: 30px">
                                 <input autocomplete="off" style="width: 100%; height: fit-content;" type="text"
-                                    placeholder="Tên, mã sản phẩm" name="infos" value="{{ request()->get('infos') }}">
+                                    placeholder="Tên, mã sản phẩm, nhà cung ứng" name="infos"
+                                    value="{{ request()->get('infos') }}">
                             </div>
                             <div class="search-btn" style="display: flex; gap: 10px">
                                 <button style="margin: 0; border: none" type="submit">Tìm kiếm</button>
@@ -77,66 +78,71 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($imports as $import)
-                                    <tr class="border">
-                                        <td class="border">
-                                            <div class="d-flex px-3 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">
-                                                        {{ \Carbon\Carbon::parse($import->date)->format('d/m/Y') }}</h6>
+                                @if (!empty($imports))
+                                    @foreach ($imports as $import)
+                                        <tr class="border">
+                                            <td class="border">
+                                                <div class="d-flex px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">
+                                                            {{ \Carbon\Carbon::parse($import->date)->format('d/m/Y') }}</h6>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        {{-- <td class="border">
+                                            </td>
+                                            {{-- <td class="border">
                                             <p class="text-sm font-weight-bold mb-0">{{ $import->document }}</p>
                                         </td> --}}
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $import->product->code }}</p>
-                                        </td>
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $import->product->name }}</p>
-                                        </td>
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $import->product->unit }}</p>
-                                        </td>
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">
-                                                <input disabled style="border: none; width: 100px; background-color: white"
-                                                    class="quantity" type="text" id="quanity_{{ $loop->index }}"
-                                                    value="{{ $import->quanity }}">
-                                            </p>
-                                        </td>
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">
-                                                <input disabled style="border: none; width: 100px; background-color: white"
-                                                    class="price" type="text" id="price_{{ $loop->index }}"
-                                                    value="{{ number_format(intval($import->price), 0, ',', '.') }}đ">
-                                            </p>
-                                        </td>
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">
-                                                <input disabled style="border: none; width: 100px; background-color: white"
-                                                    class="total" type="text" id="total_{{ $loop->index }}"
-                                                    value="{{ number_format(intval($import->quanity) * intval($import->price), 0, ',', '.') }}đ">
-                                            </p>
-                                        </td>
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $import->supplier }}</p>
-                                        </td>
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $import->note }}</p>
-                                        </td>
-                                        <td class="align-middle text-end">
-                                            <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                                <a class="btn btn-xs btn-primary mt-3" style="margin-right: 5px"
-                                                    href="{{ route('admin.import-product.edit', $import->id) }}">Sửa</a>
-                                                <a class="btn btn-xs btn-danger mt-3"
-                                                    onclick="return confirm('Bạn có chắc muốn xoá không?');"
-                                                    href="{{ route('admin.import-product.delete', $import->id) }}">Xóa</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                            <td class="border">
+                                                <p class="text-sm font-weight-bold mb-0">{{ $import->product->code }}</p>
+                                            </td>
+                                            <td class="border">
+                                                <p class="text-sm font-weight-bold mb-0">{{ $import->product->name }}</p>
+                                            </td>
+                                            <td class="border">
+                                                <p class="text-sm font-weight-bold mb-0">{{ $import->product->unit }}</p>
+                                            </td>
+                                            <td class="border">
+                                                <p class="text-sm font-weight-bold mb-0">
+                                                    <input disabled
+                                                        style="border: none; width: 100px; background-color: white"
+                                                        type="text" value="{{ intval($import->quanity) }}">
+                                                </p>
+                                            </td>
+                                            <td class="border">
+                                                <p class="text-sm font-weight-bold mb-0">
+                                                    <input disabled
+                                                        style="border: none; width: 100px; background-color: white"
+                                                        class="price" type="text"
+                                                        value="{{ number_format(intval($import->price), 0, ',', '.') }}đ">
+                                                </p>
+                                            </td>
+                                            <td class="border">
+                                                <p class="text-sm font-weight-bold mb-0">
+                                                    <input disabled
+                                                        style="border: none; width: 100px; background-color: white"
+                                                        class="total" type="text"
+                                                        value="{{ number_format(intval($import->quanity) * intval($import->price), 0, ',', '.') }}đ">
+                                                </p>
+                                            </td>
+                                            <td class="border">
+                                                <p class="text-sm font-weight-bold mb-0">{{ $import->supplier }}</p>
+                                            </td>
+                                            <td class="border">
+                                                <p class="text-sm font-weight-bold mb-0">{{ $import->note }}</p>
+                                            </td>
+                                            <td class="align-middle text-end">
+                                                <div class="d-flex px-3 py-1 justify-content-center align-items-center">
+                                                    <a class="btn btn-xs btn-primary mt-3" style="margin-right: 5px"
+                                                        href="{{ route('admin.import-product.edit', $import->id) }}">Sửa</a>
+                                                    <a class="btn btn-xs btn-danger mt-3"
+                                                        onclick="return confirm('Bạn có chắc muốn xoá không?');"
+                                                        href="{{ route('admin.import-product.delete', $import->id) }}">Xóa</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                @endif
                             </tbody>
                         </table>
                         <div class="mt-4 mb-4" style=" display: flex; justify-content: center;">
@@ -147,18 +153,4 @@
             </div>
         </div>
     </div>
-    {{-- <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var quantityInputs = document.querySelectorAll(".quantity");
-            var priceInputs = document.querySelectorAll(".price");
-            var totalInputs = document.querySelectorAll(".total");
-
-            for (var i = 0; i < quantityInputs.length; i++) {
-                var quantity = parseFloat(quantityInputs[i].value) || 0;
-                var price = parseFloat(priceInputs[i].value) || 0;
-
-                var total = quantity * price;
-            }
-        });
-    </script> --}}
 @endsection

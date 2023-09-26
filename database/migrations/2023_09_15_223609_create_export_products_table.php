@@ -17,8 +17,8 @@ class CreateExportProductsTable extends Migration
             $table->id();
             $table->text('date')->nullable();
             $table->text('document')->nullable();
-            $table->string('quanity')->nullable();
-            $table->string('price')->nullable();
+            $table->text('quanity')->nullable();
+            $table->text('price')->nullable();
             $table->string('buyer_name')->nullable();
             $table->text('note')->nullable();
             $table->bigInteger('product_id')->unsigned()->nullable();

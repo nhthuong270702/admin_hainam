@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Services\ProductService;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\ImportProduct;
 use App\Services\ImportProductService;
 use Illuminate\Http\Request;
 
@@ -88,9 +89,14 @@ class ImportProductController extends Controller
 
     public function search(Request $request)
     {
-        $infos = $request->only('infos');
-        $imports = Product::where('name', 'like', '%' . $infos['infos'] . '%')
-            ->orWhere('code', 'like', '%' . $infos['infos'] . '%')
+        $infos = $request->input('infos');
+
+        $imports = ImportProduct::join('products', 'import_products.product_id', '=', 'products.id')
+            ->where(function ($query) use ($infos) {
+                $query->where('products.name', 'like', '%' . $infos . '%')
+                    ->orWhere('products.code', 'like', '%' . $infos . '%');
+            })
+            ->orWhere('import_products.supplier', 'like', '%' . $infos . '%')
             ->paginate(10);
 
         return view('pages.import-product.list', ['imports' => $imports]);

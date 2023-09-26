@@ -15,7 +15,6 @@
                     </div>
                 @endif
                 <div class="card-header pb-0 search">
-
                     <form action="{{ route('admin.export-product.search') }}" method="GET" role="search">
                         <div class="search-container" style="display: flex">
                             <div class="search-form" style="width: 400px; margin-right: 30px">
@@ -78,67 +77,73 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($exports as $export)
-                                    <tr>
-                                        <td class="border">
-                                            <div class="d-flex px-3 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">
-                                                        {{ \Carbon\Carbon::parse($export->date)->format('d/m/Y') }}
-                                                    </h6>
+                                @if (!empty($exports))
+                                    @foreach ($exports as $export)
+                                        <tr>
+                                            <td class="border">
+                                                <div class="d-flex px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">
+                                                            {{ \Carbon\Carbon::parse($export->date)->format('d/m/Y') }}
+                                                        </h6>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        {{-- <td class="border">
+                                            </td>
+                                            {{-- <td class="border">
                                             <p class="text-sm font-weight-bold mb-0">{{ $export->document }}</p>
                                         </td> --}}
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $export->product->code }}</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-sm font-weight-bold mb-0">{{ $export->product->name }}</p>
-                                        </td>
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $export->product->unit }}</p>
-                                        </td>
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">
-                                                <input disabled style="border: none; width: 100px; background-color: white"
-                                                    class="quantity" type="text" id="quanity_{{ $loop->index }}"
-                                                    value="{{ intval($export->quanity) }}">
-                                            </p>
-                                        </td>
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">
-                                                <input disabled style="border: none; width: 100px; background-color: white"
-                                                    class="price" type="text" id="price_{{ $loop->index }}"
-                                                    value="{{ number_format(intval($export->price), 0, '', '.') }} đ">
-                                            </p>
-                                        </td>
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">
-                                                <input disabled style="border: none; width: 100px; background-color: white"
-                                                    class="total" type="text" id="total_{{ $loop->index }}"
-                                                    value="{{ number_format(intval($export->quanity) * intval($export->price), 0, ',', '.') }}đ">
-                                            </p>
-                                        </td>
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $export->buyer_name }}</p>
-                                        </td>
-                                        <td class="border">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $export->note }}</p>
-                                        </td>
-                                        <td class="align-middle text-end">
-                                            <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                                <a class="btn btn-xs btn-primary mt-3" style="margin-right: 5px"
-                                                    href="{{ route('admin.export-product.edit', $export->id) }}">Sửa</a>
-                                                <a class="btn btn-xs btn-danger mt-3"
-                                                    onclick="return confirm('Bạn có chắc muốn xoá không?');"
-                                                    href="{{ route('admin.export-product.delete', $export->id) }}">Xóa</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                            <td class="border">
+                                                <p class="text-sm font-weight-bold mb-0">{{ $export->product->code }}</p>
+                                            </td>
+                                            <td>
+                                                <p class="text-sm font-weight-bold mb-0">{{ $export->product->name }}</p>
+                                            </td>
+                                            <td class="border">
+                                                <p class="text-sm font-weight-bold mb-0">{{ $export->product->unit }}</p>
+                                            </td>
+                                            <td class="border">
+                                                <p class="text-sm font-weight-bold mb-0">
+                                                    <input disabled
+                                                        style="border: none; width: 100px; background-color: white"
+                                                        class="quantity" type="text"
+                                                        value="{{ intval($export->quanity) }}">
+                                                </p>
+                                            </td>
+                                            <td class="border">
+                                                <p class="text-sm font-weight-bold mb-0">
+                                                    <input disabled
+                                                        style="border: none; width: 100px; background-color: white"
+                                                        class="price" type="text"
+                                                        value="{{ number_format(intval($export->price), 0, '', '.') }} đ">
+                                                </p>
+                                            </td>
+                                            <td class="border">
+                                                <p class="text-sm font-weight-bold mb-0">
+                                                    <input disabled
+                                                        style="border: none; width: 100px; background-color: white"
+                                                        class="total" type="text"
+                                                        value="{{ number_format(intval($export->quanity) * intval($export->price), 0, ',', '.') }}đ">
+                                                </p>
+                                            </td>
+                                            <td class="border">
+                                                <p class="text-sm font-weight-bold mb-0">{{ $export->buyer_name }}</p>
+                                            </td>
+                                            <td class="border">
+                                                <p class="text-sm font-weight-bold mb-0">{{ $export->note }}</p>
+                                            </td>
+                                            <td class="align-middle text-end">
+                                                <div class="d-flex px-3 py-1 justify-content-center align-items-center">
+                                                    <a class="btn btn-xs btn-primary mt-3" style="margin-right: 5px"
+                                                        href="{{ route('admin.export-product.edit', $export->id) }}">Sửa</a>
+                                                    <a class="btn btn-xs btn-danger mt-3"
+                                                        onclick="return confirm('Bạn có chắc muốn xoá không?');"
+                                                        href="{{ route('admin.export-product.delete', $export->id) }}">Xóa</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                @endif
                             </tbody>
                         </table>
                         <div class="mt-4 mb-4" style=" display: flex; justify-content: center;">

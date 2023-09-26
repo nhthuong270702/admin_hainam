@@ -20,4 +20,9 @@ class Product extends Model
     {
         return $this->hasMany(ExportProduct::class);
     }
+
+    public function import_products()
+    {
+        return $this->hasMany(ImportProduct::class);
+    }
 }
