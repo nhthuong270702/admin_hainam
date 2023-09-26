@@ -20,8 +20,7 @@
                         <div class="search-container" style="display: flex">
                             <div class="search-form" style="width: 400px; margin-right: 30px">
                                 <input autocomplete="off" style="width: 100%; height: fit-content;" type="text"
-                                    placeholder="Tên, nhà sản xuất, giá, thời hạn bảo hành" name="infos"
-                                    value="{{ request()->get('infos') }}">
+                                    placeholder="Mã, tên sản phẩm" name="infos" value="{{ request()->get('infos') }}">
                             </div>
                             <div class="search-btn" style="display: flex; gap: 10px">
                                 <button style="margin: 0" type="submit">Tìm kiếm</button>
@@ -68,7 +67,7 @@
                                                 <a class="btn btn-xs btn-primary mt-3" style="margin-right: 5px"
                                                     href="{{ route('admin.product.edit', $product->id) }}">Sửa</a>
                                                 <a class="btn btn-xs btn-danger mt-3"
-                                                    onclick="return confirm('Bạn có chắc muốn xoá sản phẩm này không?');"
+                                                    onclick="return confirm('Bạn có chắc muốn xoá không?');"
                                                     href="{{ route('admin.product.delete', $product->id) }}">Xóa</a>
                                             </div>
                                         </td>

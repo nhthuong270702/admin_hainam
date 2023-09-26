@@ -36,44 +36,44 @@ Route::prefix('admin')->as('admin.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
             });
+        Route::controller(StatisticalController::class)
+            ->prefix('/statistical')->as('statistical.')
+            ->group(function () {
+                Route::get('/', 'index')->name('list');
+                Route::get('/search', 'search')->name('search');
+            });
+        Route::controller(ExportProductController::class)
+            ->prefix('/export-products')->as('export-product.')
+            ->group(function () {
+                Route::get('/', 'index')->name('list');
+                Route::get('/search-exp', 'search')->name('search');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
+                Route::get('/{id}', 'edit')->name('edit');
+                Route::post('/{id}', 'update')->name('update');
+                Route::get('/delete/{id}', 'delete')->name('delete');
+            });
+        Route::controller(ImportProductController::class)
+            ->prefix('/import-products')->as('import-product.')
+            ->group(function () {
+                Route::get('/', 'index')->name('list');
+                Route::get('/search-imp', 'search')->name('search');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
+                Route::get('/{id}', 'edit')->name('edit');
+                Route::post('/{id}', 'update')->name('update');
+                Route::get('/delete/{id}', 'delete')->name('delete');
+            });
         Route::controller(ProductController::class)
             ->prefix('/products')->as('product.')
             ->group(function () {
+                Route::get('/search-pro', 'search')->name('search');
                 Route::get('/', 'index')->name('list');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/store', 'store')->name('store');
                 Route::post('/store-product', 'storeProduct')->name('store-product');
                 Route::get('/{id}', 'edit')->name('edit');
                 Route::post('/{id}', 'update')->name('update');
-                Route::get('delete/{id}', 'delete')->name('delete');
-                Route::get('search/product', 'search')->name('search');
-            });
-        Route::controller(StatisticalController::class)
-            ->prefix('/statistical')->as('statistical.')
-            ->group(function () {
-                Route::get('/', 'index')->name('list');
-                Route::get('search/', 'search')->name('search');
-            });
-        Route::controller(ImportProductController::class)
-            ->prefix('/import-products')->as('import-product.')
-            ->group(function () {
-                Route::get('/', 'index')->name('list');
-                Route::get('/create', 'create')->name('create');
-                Route::post('/store', 'store')->name('store');
-                Route::get('/{id}', 'edit')->name('edit');
-                Route::post('/{id}', 'update')->name('update');
-                Route::get('delete/{id}', 'delete')->name('delete');
-                Route::get('search/product', 'search')->name('search');
-            });
-        Route::controller(ExportProductController::class)
-            ->prefix('/export-products')->as('export-product.')
-            ->group(function () {
-                Route::get('/', 'index')->name('list');
-                Route::get('/create', 'create')->name('create');
-                Route::post('/store', 'store')->name('store');
-                Route::get('/{id}', 'edit')->name('edit');
-                Route::post('/{id}', 'update')->name('update');
-                Route::get('delete/{id}', 'delete')->name('delete');
-                Route::get('search/product', 'search')->name('search');
+                Route::get('/delete/{id}', 'delete')->name('delete');
             });
     });
