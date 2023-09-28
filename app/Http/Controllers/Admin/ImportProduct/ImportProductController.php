@@ -33,7 +33,7 @@ class ImportProductController extends Controller
 
     public function create()
     {
-        $products = $this->productService->getAll();
+        $products = Product::all();
         return view('pages.import-product.create', ['products' => $products]);
     }
 
@@ -49,6 +49,7 @@ class ImportProductController extends Controller
             'note',
             'product_id'
         );
+        $data['date'] = date('Y-m-d', strtotime($data['date']));
         $data['price'] =  str_replace([' ', '.', '₫'], '', $data['price']);
         $this->importProductService->create($data);
         return redirect()->route('admin.import-product.list')->with('msg', 'Thêm thành công');
@@ -56,7 +57,7 @@ class ImportProductController extends Controller
 
     public function edit($id)
     {
-        $products = $this->productService->getAll();
+        $products = Product::all();
         $import = $this->importProductService->find($id);
         return view('pages.import-product.edit')->with(['import' => $import, 'products' => $products]);
     }
@@ -72,7 +73,7 @@ class ImportProductController extends Controller
             'note',
             'product_id'
         );
-
+        $data['date'] = date('Y-m-d', strtotime($data['date']));
         $product = $this->importProductService->find($id);
         $data['price'] =  str_replace([' ', '.', '₫'], '', $data['price']);
 

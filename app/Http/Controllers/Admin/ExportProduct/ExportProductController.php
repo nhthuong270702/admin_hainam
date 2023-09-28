@@ -31,7 +31,7 @@ class ExportProductController extends Controller
 
     public function create()
     {
-        $products = $this->productService->getAll();
+        $products = Product::all();
         return view('pages.export-product.create', ['products' => $products]);
     }
 
@@ -48,14 +48,14 @@ class ExportProductController extends Controller
             'product_id'
         );
         $data['price'] =  str_replace([' ', '.', '₫'], '', $data['price']);
-
+        $data['date'] = date('Y-m-d', strtotime($data['date']));
         $this->exportProductService->create($data);
         return redirect()->route('admin.export-product.list')->with('msg', 'Thêm thành công');
     }
 
     public function edit($id)
     {
-        $products = $this->productService->getAll();
+        $products = Product::all();
         $export = $this->exportProductService->find($id);
         return view('pages.export-product.edit')->with(['export' => $export, 'products' => $products]);
     }
@@ -71,7 +71,7 @@ class ExportProductController extends Controller
             'note',
             'product_id'
         );
-
+        $data['date'] = date('Y-m-d', strtotime($data['date']));
         $product = $this->exportProductService->find($id);
         $data['price'] =  str_replace([' ', '.', '₫'], '', $data['price']);
 

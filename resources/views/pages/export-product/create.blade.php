@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{ asset('css/orders/selectize.bootstrap3.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/orders/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/uploadImage.css') }}">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @section('title', 'Thêm')
 
 @section('content')
@@ -23,7 +24,7 @@
                             <div class="form-group col-lg-12 mb-4">
                                 <label class="resLabel" for="">Sản phẩm</label>
                                 <div class="sub-form">
-                                    <select class="form-control" id="exampleFormControlSelect1" name="product_id">
+                                    <select required class="form-control selectCustomer" id="exampleFormControlSelect1" name="product_id">
                                         <option value="">Chọn sản phẩm...</option>
                                         @foreach ($products as $product)
                                             <option value="{{ $product->id }}">{{ $product->name }}
@@ -40,8 +41,12 @@
                             <div class="form-group col-lg-12 mb-4">
                                 <div class="sub-form">
                                     <label for="" style="width: 105px;">Ngày bán</label>
-                                    <input autocomplete="off" required type="date" name="date"
-                                        class="form-control bg-white border-md">
+                                    {{-- <input autocomplete="off" required type="date" name="date"
+                                        class="form-control bg-white border-md"> --}}
+
+                                        <input style="cursor: pointer" autocomplete="off" required type="text"
+                                        placeholder="Nhập ngày nhập hàng" name="date"
+                                        class="form-control bg-white border-md dateInput" id="dateInput">
                                 </div>
                             </div>
                             {{-- <div class="form-group col-lg-12 mb-4">
@@ -147,7 +152,23 @@
     <script src="{{ asset('js/orders/jquery.min.js') }}"></script>
     <script src="{{ asset('js/orders/selectize.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/orders/selectize.bootstrap3.min.css') }}">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
+         $(function() {
+            $("#dateInput").datepicker({
+                dateFormat: "dd-mm-yy", // Định dạng ngày "dd/mm/yyyy"
+                showOtherMonths: true,
+                selectOtherMonths: true,
+            });
+        });
+         $(function() {
+            $('.selectCustomer').selectize({
+                sortField: 'text'
+            });
+
+            var value = 0;
+        });
         function formatCurrency(input) {
             // Lấy giá trị người dùng đã nhập
             let value = input.value;
