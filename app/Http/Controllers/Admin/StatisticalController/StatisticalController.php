@@ -78,8 +78,8 @@ class StatisticalController extends Controller
         $currentDate = Carbon::now();
         $data = $request->all();
         
-        $dateFrom = isset($data) && !empty($data['dateFrom']) ? $data['dateFrom'] : '2000-01-01';
-        $dateTo = !empty($data['dateTo']) ? $data['dateTo'] : $currentDate->toDateString();
+        $dateFrom = isset($data) && !empty($data['dateFrom']) ? date('Y-m-d', strtotime($data['dateFrom'])) : '2000-01-01';
+        $dateTo = !empty($data['dateTo']) ? date('Y-m-d', strtotime($data['dateTo'])) : $currentDate->toDateString();
 
         $importTotals = DB::table('import_products')
             ->select(

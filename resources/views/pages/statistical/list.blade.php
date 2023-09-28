@@ -1,5 +1,11 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
+<script src="{{ asset('js/orders/jquery.min.js') }}"></script>
+<script src="{{ asset('js/orders/selectize.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('css/orders/selectize.bootstrap3.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/orders/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/uploadImage.css') }}">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Tổng hợp nhập xuất tồn'])
     <div class="row mt-4 mx-4">
@@ -19,13 +25,19 @@
                         <div class="search-container" style="display: flex; flex-wrap: wrap; gap: 20px">
                             <div class="search-item">
                                 <p>Từ ngày</p>
-                                <input required style="width: 200px;" type="date" name="dateFrom"
-                                    value={{ request()->get('dateFrom') }}>
+                                {{-- <input required style="width: 200px;" type="date" name="dateFrom"
+                                    value={{ request()->get('dateFrom') }}> --}}
+                                    <input style="cursor: pointer"  autocomplete="off" required type="text"
+                                        placeholder="Nhập ngày nhập hàng" name="dateFrom"
+                                        class="form-control bg-white border-md dateInput" id="dateInput1" value={{ request()->get('dateFrom') }}>
                             </div>
                             <div class="search-item">
                                 <p>Đến ngày</p>
-                                <input required style="width: 200px;" type="date" name="dateTo"
-                                    value={{ request()->get('dateTo') }}>
+                                {{-- <input required style="width: 200px;" type="date" name="dateTo"
+                                    value={{ request()->get('dateTo') }}> --}}
+                                <input style="cursor: pointer" autocomplete="off" required type="text"
+                                    placeholder="Nhập ngày nhập hàng" name="dateTo"
+                                    class="form-control bg-white border-md dateInput" id="dateInput2" value={{ request()->get('dateTo') }} >
                             </div>
                             <div class="search-btn" style="margin-top: 43px">
                                 <button style="margin: 0; border: none" type="submit">Tìm kiếm</button>
@@ -174,4 +186,27 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('js/orders/jquery-3.2.1.slim.min.js') }}"></script>
+    <script src="{{ asset('js/orders/popper.min.js') }}"></script>
+    <script src="{{ asset('js/orders/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/orders/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/orders/selectize.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/orders/selectize.bootstrap3.min.css') }}">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $("#dateInput1").datepicker({
+                dateFormat: "dd-mm-yy", // Định dạng ngày "dd/mm/yyyy"
+                showOtherMonths: true,
+                selectOtherMonths: true,
+            });
+        });
+        $(function() {
+            $("#dateInput2").datepicker({
+                dateFormat: "dd-mm-yy", // Định dạng ngày "dd/mm/yyyy"
+                showOtherMonths: true,
+                selectOtherMonths: true,
+            });
+        });
+    </script>
 @endsection

@@ -146,7 +146,7 @@
                             </tbody>
                         </table>
                         <div class="mt-4 mb-4" style=" display: flex; justify-content: center;">
-                            {!! $imports->links() !!}
+                            {!! $imports->appends($_GET)->links() !!}
                         </div>
                     </div>
                 </div>
