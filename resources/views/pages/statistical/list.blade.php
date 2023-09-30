@@ -27,9 +27,10 @@
                                 <p>Từ ngày</p>
                                 {{-- <input required style="width: 200px;" type="date" name="dateFrom"
                                     value={{ request()->get('dateFrom') }}> --}}
-                                    <input style="cursor: pointer"  autocomplete="off" required type="text"
-                                        placeholder="Nhập ngày nhập hàng" name="dateFrom"
-                                        class="form-control bg-white border-md dateInput" id="dateInput1" value={{ request()->get('dateFrom') }}>
+                                <input style="cursor: pointer" autocomplete="off" required type="text"
+                                    placeholder="Nhập ngày nhập hàng" name="dateFrom"
+                                    class="form-control bg-white border-md dateInput" id="dateInput1"
+                                    value={{ request()->get('dateFrom') }}>
                             </div>
                             <div class="search-item">
                                 <p>Đến ngày</p>
@@ -37,7 +38,15 @@
                                     value={{ request()->get('dateTo') }}> --}}
                                 <input style="cursor: pointer" autocomplete="off" required type="text"
                                     placeholder="Nhập ngày nhập hàng" name="dateTo"
-                                    class="form-control bg-white border-md dateInput" id="dateInput2" value={{ request()->get('dateTo') }} >
+                                    class="form-control bg-white border-md dateInput" id="dateInput2"
+                                    value={{ request()->get('dateTo') }}>
+                            </div>
+                            <div class="search-item">
+                                <p>Tên quy cách</p>
+                                {{-- <input required style="width: 200px;" type="date" name="dateTo"
+                                    value={{ request()->get('dateTo') }}> --}}
+                                <input autocomplete="off" type="text" placeholder="Nhập tên quy cách" name="name"
+                                    class="form-control bg-white border-md dateInput" value={{ request()->get('name') }}>
                             </div>
                             <div class="search-btn" style="margin-top: 43px">
                                 <button style="margin: 0; border: none" type="submit">Tìm kiếm</button>
