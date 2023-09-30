@@ -90,12 +90,25 @@ class ExportProductController extends Controller
     {
         $infos = $request->input('infos');
 
+
         $exports = ExportProduct::join('products', 'export_products.product_id', '=', 'products.id')
+            ->select(
+                'export_products.id',
+                'export_products.date',
+                'export_products.quanity',
+                'export_products.price',
+                'export_products.buyer_name',
+                'export_products.note',
+                'export_products.product_id',
+                'products.code',
+                'products.name',
+                'products.unit'
+            )
             ->where(function ($query) use ($infos) {
                 $query->where('products.name', 'like', '%' . $infos . '%')
-                    ->orWhere('products.code', 'like', '%' . $infos . '%');
+                    ->orWhere('products.code', 'like', '%' . $infos . '%')
+                    ->orWhere('export_products.buyer_name', 'like', '%' . $infos . '%');
             })
-            ->orWhere('export_products.buyer_name', 'like', '%' . $infos . '%')
             ->paginate(10);
 
         return view('pages.export-product.list', ['exports' => $exports]);

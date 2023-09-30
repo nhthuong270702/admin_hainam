@@ -93,11 +93,23 @@ class ImportProductController extends Controller
         $infos = $request->input('infos');
 
         $imports = ImportProduct::join('products', 'import_products.product_id', '=', 'products.id')
+            ->select(
+                'import_products.id',
+                'import_products.date',
+                'import_products.quanity',
+                'import_products.price',
+                'import_products.supplier',
+                'import_products.note',
+                'import_products.product_id',
+                'products.code',
+                'products.name',
+                'products.unit'
+            )
             ->where(function ($query) use ($infos) {
                 $query->where('products.name', 'like', '%' . $infos . '%')
-                    ->orWhere('products.code', 'like', '%' . $infos . '%');
+                    ->orWhere('products.code', 'like', '%' . $infos . '%')
+                    ->orWhere('import_products.supplier', 'like', '%' . $infos . '%');
             })
-            ->orWhere('import_products.supplier', 'like', '%' . $infos . '%')
             ->paginate(10);
 
         return view('pages.import-product.list', ['imports' => $imports]);

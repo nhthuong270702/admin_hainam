@@ -74,14 +74,21 @@ class StatisticalController extends Controller
 
     public function search(Request $request)
     {
-       
         $currentDate = Carbon::now();
         $data = $request->all();
-        
+
         $dateFrom = isset($data) && !empty($data['dateFrom']) ? date('Y-m-d', strtotime($data['dateFrom'])) : '2000-01-01';
         $dateTo = !empty($data['dateTo']) ? date('Y-m-d', strtotime($data['dateTo'])) : $currentDate->toDateString();
+        $name = !empty($data['name']) ? $data['name'] : "";
 
-        $importTotals = DB::table('import_products')
+        $importTotals = DB::table('import_products')->join('products', 'import_products.product_id', '=', 'products.id')
+            ->select(
+                'import_products.id',
+                'products.name',
+            )
+            ->where(function ($query) use ($name) {
+                $query->where('products.name', 'like', '%' . $name . '%');
+            })
             ->select(
                 'import_products.product_id',
                 DB::raw('SUM(price*quanity) as total_price_import'), // Tổng giá nhập
@@ -92,7 +99,14 @@ class StatisticalController extends Controller
             ->groupBy('import_products.product_id')
             ->get();
 
-        $exportTotals = DB::table('export_products')
+        $exportTotals = DB::table('export_products')->join('products', 'export_products.product_id', '=', 'products.id')
+            ->select(
+                'export_products.id',
+                'products.name',
+            )
+            ->where(function ($query) use ($name) {
+                $query->where('products.name', 'like', '%' . $name . '%');
+            })
             ->select(
                 'export_products.product_id',
                 DB::raw('SUM(price*quanity) as total_price_export'), // Tổng giá xuất
@@ -138,9 +152,6 @@ class StatisticalController extends Controller
                 'average_price_export' => $averagePriceExport
             ];
         });
-
-
-        // dd(($results));
 
 
         return view('pages.statistical.list', ['results' => $results]);
