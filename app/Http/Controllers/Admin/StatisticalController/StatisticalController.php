@@ -16,7 +16,7 @@ class StatisticalController extends Controller
         $importTotals = DB::table('import_products')
             ->select(
                 'import_products.product_id',
-                DB::raw('SUM(price) as total_price_import'), // Tổng giá nhập
+                DB::raw('SUM(price*quanity) as total_price_import'), // Tổng giá nhập
                 DB::raw('COUNT(*) as total_records_import'), // Tổng số lượng bản ghi có cùng product_id
                 DB::raw('SUM(quanity) as quanity_import'),
             )
@@ -26,7 +26,7 @@ class StatisticalController extends Controller
         $exportTotals = DB::table('export_products')
             ->select(
                 'export_products.product_id',
-                DB::raw('SUM(price) as total_price_export'), // Tổng giá xuất
+                DB::raw('SUM(price*quanity) as total_price_export'), // Tổng giá xuất
                 DB::raw('COUNT(*) as total_records_export'), // Tổng số lượng bản ghi có cùng product_id
                 DB::raw('SUM(quanity) as quanity_export'),
             )
@@ -51,10 +51,10 @@ class StatisticalController extends Controller
             $productDetail = $productDetails->where('id', $importTotal->product_id)->first();
 
             // Tính trung bình giá nhập
-            $averagePriceImport = $importTotal->total_price_import / $importTotal->total_records_import;
+            $averagePriceImport = $importTotal->total_price_import / $importTotal->quanity_import;
 
             // Tính trung bình giá xuất
-            $averagePriceExport = $exportTotal ? ($exportTotal->total_price_export / $exportTotal->total_records_export) : 0;
+            $averagePriceExport = $exportTotal ? ($exportTotal->total_price_export / $exportTotal->quanity_export) : 0;
 
             return [
                 'product_name' => $productDetail ? $productDetail->product_name : null,
